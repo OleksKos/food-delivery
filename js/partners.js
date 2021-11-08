@@ -2,8 +2,9 @@ const cardsRestaurants = document.querySelector('.cards-restaurants');
 
 const renderItems = (data) => {
   console.log(data);
-  data.forEach(({ image, kitchen, name, price, products, stars, time_of_delivery }) => {
+  data.forEach((item) => {
     // // console.log(item);
+    const { image, kitchen, name, price, products, stars, time_of_delivery } = item;
     const a = document.createElement('a');
     // const {image,kitchen, name, products, stars, time_of_delivery}=item;
     a.setAttribute('href', '/restaurant.html');
@@ -26,6 +27,11 @@ const renderItems = (data) => {
 							</div>
 						</div>
       `;
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      localStorage.setItem('restaurant', JSON.stringify(item));
+      window.location.href = '/restaurant.html';
+    })
     cardsRestaurants.append(a);
   });
 }
